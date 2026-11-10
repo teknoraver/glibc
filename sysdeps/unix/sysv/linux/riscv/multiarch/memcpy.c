@@ -32,6 +32,7 @@ extern __typeof (__redirect_memcpy) __libc_memcpy;
 
 extern __typeof (__redirect_memcpy) __memcpy_generic attribute_hidden;
 extern __typeof (__redirect_memcpy) __memcpy_noalignment attribute_hidden;
+extern __typeof (__redirect_memcpy) __memcpy_shifted attribute_hidden;
 extern __typeof (__redirect_memcpy) __memcpy_vector attribute_hidden;
 
 static inline __typeof (__redirect_memcpy) *
@@ -46,7 +47,7 @@ select_memcpy_ifunc (uint64_t dl_hwcap, __riscv_hwprobe_t hwprobe_func)
       && (v & RISCV_HWPROBE_MISALIGNED_MASK) == RISCV_HWPROBE_MISALIGNED_FAST)
     return __memcpy_noalignment;
 
-  return __memcpy_generic;
+  return __memcpy_shifted;
 }
 
 riscv_libc_ifunc (__libc_memcpy, select_memcpy_ifunc);

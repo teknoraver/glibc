@@ -13,6 +13,7 @@ sysdep_routines += \
   memcpy-generic \
   memcpy-vector \
   memcpy_noalignment \
+  memcpy_shifted \
   memmove \
   memmove-generic \
   memmove-vector \
